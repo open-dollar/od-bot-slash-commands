@@ -1,4 +1,9 @@
 const { SapphireClient } = require("@sapphire/framework");
+const {
+  ApplicationCommandRegistries,
+  RegisterBehavior,
+} = require("@sapphire/framework");
+
 const { GatewayIntentBits } = require("discord.js");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -12,4 +17,8 @@ const client = new SapphireClient({
   loadMessageCommandListeners: true,
 });
 
-client.login(process.env.BOT_TOKEN);
+ApplicationCommandRegistries.setDefaultBehaviorWhenNotIdentical(
+  RegisterBehavior.BulkOverwrite
+);
+
+client.login(process.env.DISCORD_BOT_TOKEN);
