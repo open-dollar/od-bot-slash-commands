@@ -24,6 +24,21 @@ const createCommand = ({ name, description, options }) => {
 
     async chatInputRun(interaction) {
       await interaction.deferReply();
+      let quote = "";
+      try {
+        const res = await fetch(
+          "https://api.quotable.io/random?tags=love|happiness|change|creativity|freedom|gratitude|mathematics|science|social-justice|wellness"
+        );
+        const json = await res.json();
+        console.log(json);
+        quote = `> ${json.content} - ${json.author}`;
+      } catch (e) {
+        // Do nothing
+      }
+      await interaction.editReply(
+        `Received! This may take several minutes to complete...\n\n${quote}`
+      );
+      // Call the od-bot API
       const optionString = options
         ? options
             .map(
@@ -35,6 +50,7 @@ const createCommand = ({ name, description, options }) => {
       const response = await fetch(
         `${process.env.OD_API_URL}/${name}?secret=${process.env.OD_API_SECRET}${optionString}`
       );
+
       if (response.status === 200) {
         return interaction.editReply(`Request completed`);
       }
