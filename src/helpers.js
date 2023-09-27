@@ -38,8 +38,11 @@ const createCommand = ({ name, description, options }) => {
       if (response.status === 200) {
         return interaction.editReply(`Request completed`);
       }
-
-      return interaction.editReply(`Potential failure: ${response.status}`);
+      const json = await response.json();
+      return interaction.editReply(`Potential failure: ${response.status}
+\`\`\`json
+${JSON.stringify(json.error, null, 2).slice(0, 500)}
+\`\`\` `);
     }
   }
   return MyCommand;
