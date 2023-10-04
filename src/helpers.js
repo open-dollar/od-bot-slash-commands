@@ -30,7 +30,6 @@ const createCommand = ({ name, description, options }) => {
           "https://api.quotable.io/random?tags=love|happiness|change|creativity|freedom|gratitude|mathematics|science|social-justice|wellness"
         );
         const json = await res.json();
-        console.log(json);
         quote = `> ${json.content} - ${json.author}`;
       } catch (e) {
         // Do nothing
@@ -54,11 +53,16 @@ const createCommand = ({ name, description, options }) => {
       if (response.status === 200) {
         return interaction.editReply(`Request completed`);
       }
-      const json = await response.json();
-      return interaction.editReply(`Potential failure: ${response.status}
-\`\`\`json
-${JSON.stringify(json.error, null, 2).slice(0, 500)}
-\`\`\` `);
+      try {
+        console.log(response);
+        const json = await response.json();
+        return interaction.editReply(`Potential failure: ${response.status}
+  \`\`\`json
+  ${JSON.stringify(json.error, null, 2).slice(0, 500)}
+  \`\`\` `);
+      } catch (e) {
+        return interaction.editReply(`Potential failure: ${response.status}`);
+      }
     }
   }
   return MyCommand;
