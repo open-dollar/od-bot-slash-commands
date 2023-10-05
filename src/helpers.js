@@ -51,10 +51,9 @@ const createCommand = ({ name, description, options }) => {
       );
 
       if (response.status === 200) {
-        return interaction.editReply(`Request completed`);
+        return interaction.editReply(`Request complete`);
       }
       try {
-        console.log(response);
         const json = await response.json();
         return interaction.editReply(`Potential failure: ${response.status}
   \`\`\`json
