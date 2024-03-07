@@ -40,14 +40,17 @@ const createCommand = ({ name, description, options }) => {
       // Call the od-bot API
       const optionString = options
         ? options
-            .map(
-              (optionName) =>
-                `&${optionName}=${interaction.options.getString(optionName)}`
-            )
-            .join("")
+          .map(
+            (optionName) =>
+              `&${optionName}=${interaction.options.getString(optionName)}`
+          )
+          .join("")
         : "";
+
+      const networkString = `${process.env.NETWORK ? `&network=${process.env.NETWORK}` : ""}`
+
       const response = await fetch(
-        `${process.env.OD_API_URL}/${name}?secret=${process.env.OD_API_SECRET}${optionString}`
+        `${process.env.OD_API_URL}/${name}?secret=${process.env.OD_API_SECRET}${optionString}${networkString}`
       );
 
       if (response.status === 200) {
