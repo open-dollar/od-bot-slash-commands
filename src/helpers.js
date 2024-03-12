@@ -48,9 +48,9 @@ const createCommand = ({ name, description, options }) => {
         : "";
 
       const networkString = `${process.env.NETWORK ? `&network=${process.env.NETWORK}` : ""}`
-
+      const channelString = `&channel=${interaction.channelId}`
       const response = await fetch(
-        `${process.env.OD_API_URL}/${name}?secret=${process.env.OD_API_SECRET}${optionString}${networkString}`
+        `${process.env.OD_API_URL}/${name}?secret=${process.env.OD_API_SECRET}${optionString}${networkString}${channelString}`
       );
 
       if (response.status === 200) {
