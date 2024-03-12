@@ -1,6 +1,15 @@
 const { Command } = require("@sapphire/framework");
 const fetch = require("cross-fetch");
 
+const commandEnabled = (name) => {
+  if (process.env.DISABLED_COMMANDS) {
+    const disabledCommands = process.env.DISABLED_COMMANDS.split(",");
+    return !disabledCommands.includes(name);
+  }
+  return true;
+}
+
+
 const createCommand = ({ name, description, options }) => {
   class MyCommand extends Command {
     constructor(context, opts) {
@@ -8,6 +17,8 @@ const createCommand = ({ name, description, options }) => {
     }
 
     registerApplicationCommands(registry) {
+      if (!commandEnabled(name)) return
+
       registry.registerChatInputCommand((builder) => {
         builder.setName(name).setDescription(description);
         if (options)
