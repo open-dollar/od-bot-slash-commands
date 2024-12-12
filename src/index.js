@@ -3,6 +3,7 @@ const {
   ApplicationCommandRegistries,
   RegisterBehavior,
 } = require("@sapphire/framework");
+const runJobs = require("./jobs")
 
 const { GatewayIntentBits } = require("discord.js");
 const dotenv = require("dotenv");
@@ -22,3 +23,6 @@ ApplicationCommandRegistries.setDefaultBehaviorWhenNotIdentical(
 );
 
 client.login(process.env.DISCORD_BOT_TOKEN);
+
+runJobs()
+setInterval(runJobs, 3600000);
