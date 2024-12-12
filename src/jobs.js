@@ -6,11 +6,11 @@ const RATE_SECRET = process.env.RATE_SECRET
 const OD_API_URL = process.env.OD_API_URL || "https://localhost:3000/api";
 
 const apiEndpoints = [
-    `${OD_API_URL}/oracle?network=ARBITRUM`,
-    `${OD_API_URL}/rate?secret=${process.env.RATE_SECRET}&network=ARBITRUM`,
-    `${OD_API_URL}/analytics?secret=${process.env.RATE_SECRET}&network=ARBITRUM`,
-    // `${OD_API_URL}/auction?secret=${process.env.RATE_SECRET}`,
-    // `${OD_API_URL}/accounting?secret=${process.env.RATE_SECRET}&id=1`,
+    `${OD_API_URL}/oracle??secret=${RATE_SECRET}&network=ARBITRUM`,
+    `${OD_API_URL}/rate?secret=${RATE_SECRET}&network=ARBITRUM`,
+    `${OD_API_URL}/analytics?secret=${RATE_SECRET}&network=ARBITRUM`,
+    // `${OD_API_URL}/auction?secret=${RATE_SECRET}`,
+    // `${OD_API_URL}/accounting?secret=${RATE_SECRET}&id=1`,
 ];
 
 const callApiEndpoints = async () => {
@@ -19,7 +19,7 @@ const callApiEndpoints = async () => {
         try {
             const response = await fetch(endpoint);
             const data = await response.json();
-            console.log(`API endpoint ${endpoint} called successfully.`);
+            console.log(`API endpoint ${endpoint.split('?')[0]} called successfully.`);
         } catch (error) {
             console.error(`Failed to call API endpoint ${endpoint}. Error:`, error);
         }
