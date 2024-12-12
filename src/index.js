@@ -22,7 +22,7 @@ ApplicationCommandRegistries.setDefaultBehaviorWhenNotIdentical(
   RegisterBehavior.BulkOverwrite
 );
 
-client.login(process.env.DISCORD_BOT_TOKEN);
+ client.login(process.env.DISCORD_BOT_TOKEN);
 
 runJobs()
 setInterval(runJobs, 3600000);
