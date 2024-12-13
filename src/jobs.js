@@ -8,7 +8,7 @@ const OD_API_URL = process.env.OD_API_URL || "https://localhost:3000/api";
 const apiEndpoints = [
     `${OD_API_URL}/oracle?network=ARBITRUM`,
     `${OD_API_URL}/rate?network=ARBITRUM`,
-    `${OD_API_URL}/analytics?etwork=ARBITRUM`,
+    `${OD_API_URL}/analytics?network=ARBITRUM`,
     // `${OD_API_URL}/auction?etwork=ARBITRUM`,
 ];
 
